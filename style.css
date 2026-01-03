@@ -1,0 +1,140 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+@layer header, main;
+
+@layer header {
+    nav {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem;
+        border-bottom: 1px solid #a7a7a7;
+        background-color: #fafafa;
+        gap: 1rem;
+
+        & .top-wr {
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            justify-content: space-between;
+
+            & .logo-wr {
+                padding-left: 2rem;
+
+                & a {
+                    text-decoration: none;
+                    color: #000;
+
+                    &:hover {
+                        font-size: 1.1rem;
+                        text-decoration: underline;
+                        text-decoration-thickness: 2px;
+                    }
+                }
+            }
+
+            & .desc-wr {
+                width: 200px;
+                color: #5e5e5e;
+                padding: 1rem;
+                background-color: #f7ff55;
+                box-shadow: 2px 2px 0px 0px #000;
+            }
+
+        }
+
+        & .link-wr {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            padding-right: 2rem;
+
+            & a {
+                display: inline-flex;
+                align-items: center;
+                gap: 2px;
+                text-decoration: underline;
+                color: #000;
+            }
+
+            & svg {
+                padding: 0.3rem;
+                transition: transform 0.1s ease;
+
+                &:hover {
+                    transform: scale(1.1);
+                }
+            }
+        }
+    }
+}
+
+@layer main {
+    .list-wr {
+        margin: 2rem 5rem;
+        padding: 0.5rem;
+
+        & ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            & li {
+                padding: 0.75rem 1rem;
+                cursor: pointer;
+
+                & a {
+                    font-size: 1.2rem;
+                    display: inline-block;
+                    color: #000;
+                    text-decoration: none;
+                    transition: transform 0.1s ease;
+
+                    &:hover {
+                        transform: translateX(2px);
+                    }
+                }
+            }
+        }
+    }
+}
+
+@layer container {
+    .post {
+        padding: 2rem 8rem;
+
+        & blockquote {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            border-left: 4px solid #999;
+            background: #f7f7f7;
+            color: #444;
+            font-style: italic;
+
+            & p {
+                margin: 0;
+            }
+        }
+
+        & pre {
+            margin: 1.5rem 0;
+            padding: 1rem 1.25rem;
+            background: #1e1e1e;
+            color: #eaeaea;
+            border-radius: 6px;
+            overflow-x: auto;
+            font-size: 0.9rem;
+            width: fit-content;
+
+            & p code {
+                padding: 0.15em 0.35em;
+                background: #eee;
+                border-radius: 4px;
+                font-size: 0.9em;
+            }
+        }
+    }
+}
