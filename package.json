@@ -4,6 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
+    "prebuild": "node buildPosts.js",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
@@ -14,6 +15,7 @@
   },
   "dependencies": {
     "@vitejs/plugin-vue": "^6.0.3",
-    "marked": "^17.0.1"
+    "marked": "^17.0.1",
+    "node-fetch": "^3.3.2"
   }
 }
