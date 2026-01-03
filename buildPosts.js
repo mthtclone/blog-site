@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import chalk from "chalk";
 import { spawn } from "child_process";
 import fetch from "node-fetch";
 import fs from "fs";
@@ -10,6 +11,22 @@ const STRAPI_URL = `http://localhost:${STRAPI_PORT}/api/posts`;
 const JSON_OUTPUT = path.resolve("src/posts.json");
 const IMAGES_DIR = path.resolve("./public/uploads");
 
+function logInfo(msg) {
+    console.log(chalk.bgCyan.black.bold(" INFO "), msg);
+}
+
+function logSuccess(msg) {
+    console.log(chalk.bgGreen.black.bold(" SUCCESS "), msg);
+}
+
+function logWarning(msg) {
+    console.log(chalk.bgYellow.black.bold(" WARN "), msg);
+}
+
+function logError(msg) {
+    console.error(chalk.bgRed.black.bold(" ERROR "), msg);
+}
+
 function sleep(ms) {
     return new Promise((resolve) => setTimeout(resolve, ms));
 }
@@ -20,7 +37,7 @@ async function downloadImages(url, filename) {
 
     const buffer = await res.arrayBuffer();
     fs.writeFileSync(filename, Buffer.from(buffer));
-    console.log(`Downloaded ${filename}`);
+    logSuccess(`Downloaded ${filename}`);
 }
 
 async function processImages(posts) {
@@ -46,7 +63,7 @@ async function processImages(posts) {
             try {
                 await downloadImages(url, fullLocalPath);
             } catch (err) {
-                console.error(err);
+                logError(err);
                 continue;
             }
 
@@ -61,11 +78,11 @@ async function processImages(posts) {
         JSON.stringify({ data: posts }, null, 2)
     );
 
-    console.log("All images downloaded and Mardkown updated.")
+    logSuccess("All images downloaded and Mardkown updated.")
 }
 
 async function startStrapi() {
-    console.log("Starting Strapi server...")
+    logInfo("Starting Strapi server...");
 
     const strapi = spawn("npx", ["strapi", "start"], {
         cwd: STRAPI_FOLDER,
@@ -78,7 +95,7 @@ async function startStrapi() {
         process.stdout.write(line);
     });
 
-    console.log("Waiting for Strapi to be ready...");
+    logInfo("Waiting for Strapi to be ready...");
 
     let ready = false;
     const maxRetries = 20;
@@ -103,20 +120,20 @@ async function startStrapi() {
         throw new Error("Strapi did not start in time.");
     }
 
-    console.log("Strapi is ready!");
+   logInfo("Strapi is ready!");
 
     const response = await fetch(STRAPI_URL, { headers: { Accept: "application/json" } });
     const json = await response.json();
     const posts = json.data || [];
 
     fs.writeFileSync(JSON_OUTPUT, JSON.stringify(json, null, 2));
-    console.log(`Saved JSON to ${JSON_OUTPUT}`);
+    logSuccess(`Saved JSON to ${JSON_OUTPUT}`);
 
     // run downloadImg.js script here
     await processImages(posts);
 
     strapi.kill("SIGINT");
-    console.log("Strapi server stopped.");
+    logError("Strapi did not start in time.");
     process.exit(0);
 }
 
