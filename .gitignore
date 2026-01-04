@@ -12,7 +12,6 @@ strapi
 posts
 public
 src/posts.json
-dist
 dist-ssr
 *.local
 
