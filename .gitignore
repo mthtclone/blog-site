@@ -9,7 +9,6 @@ lerna-debug.log*
 
 node_modules
 strapi
-posts
 public
 src/posts.json
 dist-ssr
