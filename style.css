@@ -138,3 +138,129 @@ body {
         }
     }
 }
+
+@media (max-width: 1024px) {
+    @layer header {
+        nav {
+            padding: 1rem;
+
+            & .top-wr {
+                flex-direction: column;
+                gap: 1rem;
+
+                & .logo-wr {
+                    padding-left: 0;
+                }
+
+                & .desc-wr {
+                    width: 80%;
+                }
+            }
+
+            & .link-wr {
+                align-items: flex-start;
+                padding-right: 0;
+            }
+        }
+    }
+
+    @layer main {
+        .list-wr {
+            margin: 2rem;
+        }
+    }
+
+    @layer container {
+        .post {
+            padding: 2rem 3rem;
+
+            & img {
+                margin: 1.25rem auto;
+            }
+
+            & pre p code {
+                font-size: 0.85em;
+            }
+        }
+    }
+}
+
+@media (max-width: 768px) {
+    @layer header {
+        nav {
+            gap: 0.75rem;
+
+            & .top-wr {
+                & .desc-wr {
+                    padding: 0.75rem;
+                    font-size: 0.9rem;
+                }
+            }
+
+            & .link-wr {
+                align-items: flex-start;
+
+                & a {
+                    font-size: 0.95rem;
+                }
+            }
+        }
+    }
+
+    @layer main {
+        .list-wr {
+            margin: 1rem;
+
+            & ul li a {
+                font-size: 1.05rem;
+            }
+        }
+    }
+
+    @layer container {
+        .post {
+            padding: 1.5rem;
+
+            & pre {
+                font-size: 0.85rem;
+                max-width: 100%;
+            }
+
+            & img {
+                max-width: 100%;
+                height: auto;
+                display: block;
+            }
+        }
+    }
+}
+
+@media (max-width: 480px) {
+    @layer header {
+        nav {
+            padding: 0.75rem;
+
+            & .top-wr {
+                & .logo-wr a {
+                    font-size: 1rem;
+                }
+            }
+        }
+    }
+
+    @layer main {
+        .list-wr {
+            margin: 0.75rem;
+        }
+    }
+
+    @layer container {
+        .post {
+            padding: 1rem;
+
+            & pre p code {
+                font-size: 0.75em;
+            }
+        }
+    }
+}
